@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Matches</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h1 id="heroTitle"></h1>
+
+    <img id="heroImage" src="" alt="Hero Image" style="width:150px; border-radius:6px; margin-bottom:20px;">
+
+    <div>
+        <label for="playerID">Enter Player ID:</label>
+        <input type="text" id="playerID" placeholder="Steam/Dota ID">
+        <button onclick="loadMatches()">Show Matches</button>
+    </div>
+
+    <div id="matches" style="margin-top:20px;"></div>
+
+    <script src="js/matches.js"></script>
+</body>
+
+</html>
