@@ -1,11 +1,9 @@
 const params = new URLSearchParams(window.location.search)
-
 const heroID = params.get("hero")
 const heroName = params.get("name")
 
 document.getElementById("heroTitle").innerText = "Hero: " + heroName
 document.getElementById("heroImage").src = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName.toLowerCase().replace(/ /g, "_")}.png`;
-
 
 // Load matches when page loads
 async function loadPlayerProfile(playerID) {
@@ -24,7 +22,6 @@ async function loadPlayerProfile(playerID) {
 <p><strong>Total Wins:</strong> ${profile.wins || "N/A"}</p>
 <p><strong>Total Losses:</strong> ${profile.losses || "N/A"}</p>
 `
-
 }
 
 // Load matches when button is clicked
@@ -47,8 +44,6 @@ async function loadMatches() {
 
     loadPlayerProfile(playerID)
 }
-
-
 
 //display matches win/lose
 function displayMatches(matches) {
@@ -75,7 +70,6 @@ function displayMatches(matches) {
                <strong>Deaths:</strong> ${match.deaths} &nbsp; 
                <strong>Assists:</strong> ${match.assists}</p>
         `
-
         const resultBadge = document.createElement("div")
         resultBadge.className = resultClass
         resultBadge.innerText = resultText
