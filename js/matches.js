@@ -6,6 +6,27 @@ const heroName = params.get("name")
 document.getElementById("heroTitle").innerText = "Hero: " + heroName
 document.getElementById("heroImage").src = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName.toLowerCase().replace(/ /g, "_")}.png`;
 
+
+// Load matches when page loads
+async function loadPlayerProfile(playerID) {
+    const url = `https://api.opendota.com/api/players/${playerID}`
+
+    const response = await fetch(url)
+
+    const profile = await response.json()
+
+    const container = document.getElementById("playerProfile")
+
+    container.innerHTML = `
+<h3>Player Profile</h3>
+<p><strong>Name:</strong> ${profile.profile?.personaname || "Unknown"}</p>
+<p><strong>MMR Estimate:</strong> ${profile.mmr_estimate?.estimate || "N/A"}</p>
+<p><strong>Total Wins:</strong> ${profile.wins || "N/A"}</p>
+<p><strong>Total Losses:</strong> ${profile.losses || "N/A"}</p>
+`
+
+}
+
 // Load matches when button is clicked
 async function loadMatches() {
 
@@ -21,23 +42,8 @@ async function loadMatches() {
     const matches = await response.json()
 
     displayMatches(matches)
-    
-    async function loadPlayerProfile(playerID) {
-        const url = `https://api.opendota.com/api/players/${playerID}`
-        const response = await fetch(url)
-        const profile = await response.json()
 
-        const profileDiv = document.createElement("div")
-        profileDiv.style.margin = "20px 0"
-        profileDiv.innerHTML = `
-        <h3>Player Profile</h3>
-        <p><strong>Name:</strong> ${profile.profile?.personaname || "Unknown"}</p>
-        <p><strong>MMR Estimate:</strong> ${profile.mmr_estimate?.estimate || "N/A"}</p>
-        <p><strong>Total Wins:</strong> ${profile.wins || "N/A"}</p>
-        <p><strong>Total Losses:</strong> ${profile.losses || "N/A"}</p>
-    `
-        document.body.prepend(profileDiv)
-    }
+
 
     loadPlayerProfile(playerID)
 }
